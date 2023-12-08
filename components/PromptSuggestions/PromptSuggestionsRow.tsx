@@ -2,10 +2,10 @@ import PromptSuggestionButton from "./PromptSuggestionButton";
 
 const PromptSuggestionRow = ({ onPromptClick }) => {
   const prompts = [
-    "Who is the 2023 Time's Person of the Year?",
-    'Where does Messi play and how much does he make?',
-    'When was Twitter renamed to X?',
-    "What is the status of the next Star Wars films?",
+    "How did Taylor become 2023 Time's Person of the Year?",
+    'Where is the next stop on the Eras Tour?',
+    'What was the last Chiefs game Taylor attended?',
+    "How many Grammy Awards has Taylor won?",
   ];
 
   return (
