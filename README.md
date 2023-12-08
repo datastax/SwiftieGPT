@@ -1,11 +1,11 @@
-# Amazon Bedrock Starter
+# Chatbot (Taylor's Version)
 
-This project is a starter for creating a chatbot using Astra DB and AWS Bedrock. It's designed to be easy to deploy and use, with a focus on performance and usability.
+This project is a starter for creating a chatbot using Astra DB and Vercel. It's designed to be easy to deploy and use, with a focus on performance and usability.
 
 ## Features
 
 - **Astra DB Integration**: Store and retrieve data from your Astra DB database with ease.
-- **AWS Bedrock Integration**: Leverage the power of OpenAI to generate intelligent responses.
+- **OpenAI Integration**: Leverage the power of OpenAI to generate intelligent responses.
 - **Easy Deployment**: Deploy your chatbot to Vercel with just a few clicks.
 - **Customizable**: Modify and extend the chatbot to suit your needs.
 
@@ -15,13 +15,14 @@ This project is a starter for creating a chatbot using Astra DB and AWS Bedrock.
 
 - An Astra DB account. You can [create one here](https://astra.datastax.com/register).
     - An Astra Vector Database
-- An Amazon Bedrock instance.
+- An OpenAI account and api key [create one here](https://platform.openai.com/)
 
 ### Setup
 
 1. Clone this repository to your local machine.
 2. Install the dependencies by running `npm install` in your terminal.
 3. Set up the following environment variables in your IDE or `.env` file:
+    - `OPENAI_API_KEY`: api key for OPENAI
     - `ASTRA_DB_NAMESPACE`: The existing Astra Namespace/Keyspace **_in a vector-enabled DB_**
     - `ASTRA_DB_ID`: Your Astra DB vector database id
     - `ASTRA_DB_REGION`: Your Astra DB database region
