@@ -13,24 +13,11 @@ const {
   ASTRA_DB_REGION,
   ASTRA_DB_NAMESPACE,
   ASTRA_DB_COLLECTION,
-  BEDROCK_AWS_REGION,
-  BEDROCK_AWS_ACCESS_KEY_ID,
-  BEDROCK_AWS_SECRET_ACCESS_KEY,
   COHERE_API_KEY,
 } = process.env;
 
 const cohere = new CohereClient({
   token: COHERE_API_KEY,
-});
-
-
-const embeddings = new BedrockEmbeddings({
-  region: BEDROCK_AWS_REGION,
-  credentials: {
-    accessKeyId: BEDROCK_AWS_ACCESS_KEY_ID,
-    secretAccessKey: BEDROCK_AWS_SECRET_ACCESS_KEY,
-  },
-  model: "amazon.titan-embed-text-v1"
 });
 
 const openai = new OpenAI({
@@ -48,21 +35,8 @@ export async function POST(req: Request) {
     const {messages, useRag, llm, similarityMetric} = await req.json();
     const latestMessage = messages[messages?.length - 1]?.content;
 
-    // const { stream, handlers, } = LangChainStream();
-    // const bedrock = new BedrockChat({
-    //   region: BEDROCK_AWS_REGION,
-    //   credentials: {
-    //     accessKeyId: BEDROCK_AWS_ACCESS_KEY_ID,
-    //     secretAccessKey: BEDROCK_AWS_SECRET_ACCESS_KEY,
-    //   },
-    //   maxTokens: 2048,
-    //   model: llm,
-    //   streaming: true,
-    // });
-
     let docContext = '';
     if (useRag) {
-      // const embedded = await embeddings.embedQuery(latestMessage);
 
       const embedded = await cohere.embed({
         texts: [latestMessage],
@@ -76,12 +50,13 @@ export async function POST(req: Request) {
           sort: {
             $vector: embedded?.embeddings[0],
           },
-          limit: 5,
+          limit: 10,
         });
 
         const documents = await cursor.toArray();
-        const docsMap = documents?.map(doc => { return {title: doc.title, url: doc.url, context: doc.content }});
 
+        const docsMap = documents?.map(doc => doc.text);
+        
         console.log(docsMap);
 
         docContext = JSON.stringify(docsMap);
@@ -93,11 +68,10 @@ export async function POST(req: Request) {
 
     const Template = {
       role: 'system',
-      content: `You are an AI assistant answering questions about anything from Wikipedia the context will provide you with the most relevant page data along with the source pages title and url.
-        Refer to the context as wikipedia data. Format responses using markdown where applicable and don't return images.
-        If referencing the text/context refer to it as Wikipedia.
-        At the end of the response on a line by itself add a markdown link to the Wikipedia url where the most relevant data was found label it with the title of the wikipedia page and no "Source:" or "Wikipedia" prefix or other text.
-        Refer to this source as "the source below".
+      content: `You are an AI assistant who is a Taylor Swift super fan. Use the below context to augement what you know about Taylor Swift and her music.
+        The context will provide you with the most recent page data from her wikipedia, tour website and others.
+        If the context doesn't include the information you need answer based on your existing knowledge and don't mention the source of your information or what the context does or doesn't include.
+        Format responses using markdown where applicable and don't return images.
         ----------------
         START CONTEXT
         ${docContext}
@@ -107,17 +81,6 @@ export async function POST(req: Request) {
         ----------------      
         `
     };
-
-    // bedrock.call(
-    //   [Template, ...messages].map(m =>
-    //     m.role == 'user'
-    //       ? new HumanMessage(m.content)
-    //       : m.role == 'system' ? new SystemMessage(m.content)
-    //       : new AIMessage(m.content),
-    //   ),
-    //   { stop: ['Human: ']},
-    //   [handlers]
-    // );
 
     const response = await openai.chat.completions.create(
       {
