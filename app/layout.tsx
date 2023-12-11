@@ -3,7 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 
 export const metadata = {
-  title: `Chatbot(Taylor's Version)`,
+  title: `Chatbot (Taylor's Version)`,
   description: `Welcome to "TaylorMade", your go-to chatbot for all things Taylor Swift! Whether you're curious about her latest songs, looking for fun facts, or just want to chat about Tay's amazing journey, I'm here to keep you in the Swift loop. Let's talk Taylor!`,
 };
 
