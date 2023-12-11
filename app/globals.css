@@ -263,13 +263,13 @@ body {
 
 .header {
   overflow: hidden;
-  margin: -.5rem -0.5rem 0 -0.5rem;
+  margin: 0 -0.5rem 0 -0.5rem;
 }
 
 @media (min-width: 768px) {
   .header {
     overflow: hidden;
-    margin: -1.5rem -1.5rem 0 -1.5rem;
+    margin: -1rem -1.5rem 0 -1.5rem;
   }
 }
 
@@ -286,13 +286,13 @@ body {
 
 .footer {
   overflow: hidden;
-  margin: 0 -0.5rem -0.5rem -0.5rem;
+  margin: 0 -0.5rem 0 -0.5rem;
 }
 
 @media (min-width: 768px) {
   .footer {
     overflow: hidden;
-    margin: 0 -1.5rem -1.5rem -1.5rem;
+    margin: 0 -1.5rem -1rem -1.5rem;
   }
 }
 

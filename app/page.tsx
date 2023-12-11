@@ -38,12 +38,12 @@ export default function Home() {
   return (
     <>
     <main className="flex h-screen flex-col items-center justify-center">
-      <section className='chatbot-section flex flex-col origin:w-[800px] w-full origin:h-[735px] h-full rounded-md p-2 md:p-6'>
+      <section className='chatbot-section flex flex-col origin:w-[800px] w-full origin:h-[735px] h-full rounded-md px-2 md:px-6 md:py-4'>
         {!messages || messages.length === 0 ? (
           <div className='h-full flex flex-col items-center'>
             <Image src={tswiftImg} width="250" height="75" alt="Chatbot (Taylor's Version) logo" />
             <div className='h-full flex flex-col justify-center'>
-              <p className="chatbot-text-secondary-inverse text-sm md:text-base mt-2 md:mt-4">
+              <p className="chatbot-text-secondary-inverse text-sm md:text-base mt-2 md:mt-4 px-2">
                 Chatting with Chatbot (Taylor&apos;s Version) is a breeze! Simply type your questions or requests in a clear and concise manner. Responses are sourced from her Wikipedia page, Eras tour website and others.
               </p>
               <PromptSuggestionRow onPromptClick={handlePrompt} />
