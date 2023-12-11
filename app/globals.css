@@ -14,9 +14,11 @@
   --background-soft: #F3E5F5;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
-  --text-tertiary: #6B6F73;
+  --text-tertiary: #820DEB;
   --shadow-primary: 0px 6px 16px 0px #0A0A0A1F, 0px 4px 14px 0px #0A0A0A14, 0px 8px 10px 0px #0A0A0A14;
   --processing-dot-size: 4px;
+  --header-background: #862FBA;
+  --footer-background: #DA92FC;
 }
 
 
@@ -73,7 +75,8 @@ body {
 
 .chatbot-input {
   color: var(--text-primary-inverse);
-  border: 1px solid var(--border-primary);
+  background-color: var(--text-primary);
+  /* border: 1px solid var(--border-primary); */
 }
 
 .chatbot-input::placeholder {
@@ -247,4 +250,59 @@ body {
 
 .link {
   color: var(--text-primary-main);
+}
+
+.active-chat-header {
+  font-family: 'Brush Script MT', cursive;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 36px;
+  letter-spacing: 0em;
+  text-align: right;
+}
+
+.header {
+  overflow: hidden;
+  margin: -.5rem -0.5rem 0 -0.5rem;
+}
+
+@media (min-width: 768px) {
+  .header {
+    overflow: hidden;
+    margin: -1.5rem -1.5rem 0 -1.5rem;
+  }
+}
+
+.clip-path-header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: var(--header-background);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 70%);
+  z-index: 0;
+}
+
+.footer {
+  overflow: hidden;
+  margin: 0 -0.5rem -0.5rem -0.5rem;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    overflow: hidden;
+    margin: 0 -1.5rem -1.5rem -1.5rem;
+  }
+}
+
+.clip-path-footer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: var(--footer-background);
+  clip-path: polygon(0 0, 100% 30%, 100% 100%, 0 100%);
+  z-index: 0;
 }

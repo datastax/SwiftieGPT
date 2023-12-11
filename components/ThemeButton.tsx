@@ -12,14 +12,14 @@ const ToggleButton = () => {
       return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     };
 
-    const initialTheme = getLocalValue();
+    const initialTheme = 'light';
     setTheme(initialTheme);
 
-    if (initialTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    // if (initialTheme === 'dark') {
+    //   document.documentElement.classList.add('dark');
+    // } else {
+    //   document.documentElement.classList.remove('dark');
+    // }
   }, []);
 
   useEffect(() => {
