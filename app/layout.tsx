@@ -3,8 +3,8 @@ import Script from "next/script";
 import "./globals.css";
 
 export const metadata = {
-  title: "WikiChat",
-  description: "Chatting with WikiChat is a breeze! Simply type your questions or requests in a clear and concise manner. Responses are sourced from a real-time Wikipedia feed and a link for further reading is provided.",
+  title: `Chatbot(Taylor's Version)`,
+  description: `Welcome to "TaylorMade", your go-to chatbot for all things Taylor Swift! Whether you're curious about her latest songs, looking for fun facts, or just want to chat about Tay's amazing journey, I'm here to keep you in the Swift loop. Let's talk Taylor!`,
 };
 
 export default function RootLayout({ children }) {
