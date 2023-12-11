@@ -30,6 +30,17 @@ This project is a starter for creating a chatbot using Astra DB and Vercel. It's
         - To create a new token go to your database's `Connect` tab and click `Generate Token`. (your Application Token begins with `AstraCS:...`)
 4. Populate your database with sample data by running `npm run seed` in your terminal.
 
+Or - 
+
+5. Load Taylor's data from a number of sources around the web. In the `scripts/` directory are three files.
+
+ - **tsScraper.py** - Pulls down HTML data from an array of web URLs.
+ - **tsFileProcessor.py** - Converts the HTML files to text files.
+ - **tsAPILoader.py** - Processes the text files, generates vector embeddings, and saves them into Astra DB, assuming the following env vars exist:
+        - `ASTRA_DB_APPLICATION_TOKEN`
+        - `ASTRA_DB_API_ENDPOINT`
+        - `COHERE_API_KEY` (a free account with Cohere is fine)
+
 ### Running the Project
 
 To start the development server, run `npm run dev` in your terminal. Open [http://localhost:3000](http://localhost:3000) to view the chatbot in your browser.
