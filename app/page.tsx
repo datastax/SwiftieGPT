@@ -30,7 +30,7 @@ export default function Home() {
   }
 
   const handlePrompt = (promptText) => {
-    const msg: Message = { id: randomUUID(),  content: promptText, role: 'user' };
+    const msg: Message = { id: crypto.randomUUID(),  content: promptText, role: 'user' };
     append(msg, { options: { body: { useRag, llm, similarityMetric}}});
   };
 
