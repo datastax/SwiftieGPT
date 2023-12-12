@@ -1,22 +1,17 @@
 "use client";
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useRef} from 'react';
 import Image from 'next/image';
 import tswiftImg from './assets/taylors_version.png';
 import Bubble from '../components/Bubble'
 import { useChat } from 'ai/react';
 import Footer from '../components/Footer';
-import Configure from '../components/Configure';
-import ThemeButton from '../components/ThemeButton';
-import useConfiguration from './hooks/useConfiguration';
 import PromptSuggestionRow from '../components/PromptSuggestions/PromptSuggestionsRow';
 import { Message } from 'ai';
 
 export default function Home() {
   const { append, messages, input, handleInputChange, handleSubmit } = useChat();
-  const { useRag, llm, similarityMetric, setConfiguration } = useConfiguration();
 
   const messagesEndRef = useRef(null);
-  const [configureOpen, setConfigureOpen] = useState(false);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -26,17 +21,13 @@ export default function Home() {
     scrollToBottom();
   }, [messages]);
 
-  const handleSend = (e) => {
-    handleSubmit(e, { options: { body: { useRag, llm, similarityMetric}}});
-  }
 
   const handlePrompt = (promptText) => {
     const msg: Message = { id: crypto.randomUUID(),  content: promptText, role: 'user' };
-    append(msg, { options: { body: { useRag, llm, similarityMetric}}});
+    append(msg);
   };
 
   return (
-    <>
     <main className="flex h-screen flex-col items-center justify-center">
       <section className='chatbot-section flex flex-col origin:w-[800px] w-full md:h-[735px] h-full rounded-md px-2 md:px-6 md:py-4'>
         {!messages || messages.length === 0 ? (
@@ -68,7 +59,7 @@ export default function Home() {
         <div className="relative text-white p-4 pt-16 rounded-b-md footer overflow-hidden">
           <div className="absolute inset-0 clip-path-footer"></div>
           <div className="relative z-10">
-            <form className='flex h-[40px] gap-2' onSubmit={handleSend}>
+            <form className='flex h-[40px] gap-2' onSubmit={handleSubmit}>
               <input onChange={handleInputChange} value={input} className='chatbot-input flex-1 text-sm md:text-base outline-none bg-transparent rounded-lg p-2' placeholder='Send a message...' />
               <button type="submit" className='chatbot-send-button flex rounded-md items-center justify-center px-2.5 origin:px-3'>
                 <span className='font-semibold text-sm'>Send</span>
@@ -79,14 +70,5 @@ export default function Home() {
         </div>
       </section>
     </main>
-    <Configure
-      isOpen={configureOpen}
-      onClose={() => setConfigureOpen(false)}
-      useRag={useRag}
-      llm={llm}
-      similarityMetric={similarityMetric}
-      setConfiguration={setConfiguration}
-    />
-    </>
   )
 }

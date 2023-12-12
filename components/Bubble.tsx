@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
-import {forwardRef, JSXElementConstructor, useMemo, RefObject} from "react";
+import {forwardRef, JSXElementConstructor, RefObject} from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
