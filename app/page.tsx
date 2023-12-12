@@ -7,9 +7,10 @@ import { useChat } from 'ai/react';
 import Footer from '../components/Footer';
 import PromptSuggestionRow from '../components/PromptSuggestions/PromptSuggestionsRow';
 import { Message } from 'ai';
+import LoadingBubble from '../components/LoadingBubble';
 
 export default function Home() {
-  const { append, messages, input, handleInputChange, handleSubmit } = useChat();
+  const { append, isLoading, messages, input, handleInputChange, handleSubmit } = useChat();
 
   const messagesEndRef = useRef(null);
 
@@ -52,6 +53,7 @@ export default function Home() {
             <div className='flex-1 relative overflow-y-auto my-4 md:my-6'>
               <div className='absolute w-full h-full overflow-x-hidden'>
                 {messages.map((message, index) => <Bubble ref={messagesEndRef} key={`message-${index}`} content={message} />)}
+                {isLoading && <LoadingBubble ref={messagesEndRef} />}
               </div>
             </div>
           </>

@@ -139,8 +139,8 @@ body {
   width: var(--processing-dot-size);
   height: var(--processing-dot-size);
   border-radius: 100%;
-  background-color: var(--text-tertiary);
-  color: var(--text-tertiary);
+  background-color: var(--text-primary-inverse);
+  color: var(--text-primary-inverse);
   animation: dot-flashing 1s infinite linear alternate;
   animation-delay: 0.5s;
 }
@@ -158,8 +158,8 @@ body {
   width: var(--processing-dot-size);
   height: var(--processing-dot-size);
   border-radius: 100%;
-  background-color: var(--text-tertiary);
-  color: var(--text-tertiary);
+  background-color: var(--text-primary-inverse);
+  color: var(--text-primary-inverse);
   animation: dot-flashing 1s infinite alternate;
   animation-delay: 0s;
 }
@@ -169,15 +169,15 @@ body {
   width: var(--processing-dot-size);
   height: var(--processing-dot-size);
   border-radius: 100%;
-  background-color: var(--text-tertiary);
-  color: var(--text-tertiary);
+  background-color: var(--text-primary-inverse);
+  color: var(--text-primary-inverse);
   animation: dot-flashing 1s infinite alternate;
   animation-delay: 1s;
 }
 
 @keyframes dot-flashing {
   0% {
-    background-color: var(--text-tertiary);
+    background-color: var(--text-primary-inverse);
   }
 
   50%,
