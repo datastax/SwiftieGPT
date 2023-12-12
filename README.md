@@ -25,6 +25,7 @@ This project is a starter for creating a chatbot using Astra DB and Vercel. It's
 2. Install the dependencies by running `npm install` in your terminal.
 3. Set up the following environment variables in your IDE or `.env` file:
     - `OPENAI_API_KEY`: api key for OPENAI
+    - `COHERE_API_KEY`: api key for COHERE
     - `ASTRA_DB_NAMESPACE`: The existing Astra Namespace/Keyspace **_in a vector-enabled DB_**
     - `ASTRA_DB_ID`: Your Astra DB vector database id
     - `ASTRA_DB_REGION`: Your Astra DB database region
