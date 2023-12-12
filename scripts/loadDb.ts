@@ -1,5 +1,5 @@
 import {AstraDB} from "@datastax/astra-db-ts";
-import { PuppeteerWebBaseLoader } from "langchain/document_loaders/web/puppeteer";
+import {PuppeteerWebBaseLoader} from "langchain/document_loaders/web/puppeteer";
 
 
 import {RecursiveCharacterTextSplitter} from "langchain/text_splitter";
@@ -47,6 +47,7 @@ const createCollection = async (similarityMetric: SimilarityMetric = 'dot_produc
 const loadSampleData = async (similarityMetric: SimilarityMetric = 'dot_product') => {
   const collection = await astraDb.collection(ASTRA_DB_COLLECTION);
   for await (const url of taylorData) {
+    console.log(`Processing url ${url}`);
     const content = await scrapePage(url);
     const chunks = await splitter.splitText(content);
     let i = 0;
@@ -61,6 +62,7 @@ const loadSampleData = async (similarityMetric: SimilarityMetric = 'dot_product'
         $vector: embedded[0]?.embedding,
         text: chunk
       });
+      console.log(res)
       i++;
     }
   }
