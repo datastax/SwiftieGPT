@@ -15,6 +15,12 @@ const cohere = new CohereClient({
 
 const taylorData = [
   'https://time.com/6342806/person-of-the-year-2023-taylor-swift/',
+  'https://en.wikipedia.org/wiki/Taylor_Swift',
+  'https://en.wikipedia.org/wiki/Taylor_Swift_albums_discography',
+  'https://www.taylorswift.com/tour/',
+  'https://taylorswift.tumblr.com/',
+  'https://www.forbes.com/profile/taylor-swift/?sh=242c42f818e2',
+  'https://taylorswiftstyle.com/',
 ];
 
 const {ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_ID, ASTRA_DB_REGION, ASTRA_DB_NAMESPACE} = process.env;
