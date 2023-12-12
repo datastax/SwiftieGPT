@@ -11,6 +11,7 @@ const {
   ASTRA_DB_NAMESPACE,
   ASTRA_DB_COLLECTION,
   COHERE_API_KEY,
+  OPENAI_API_KEY,
 } = process.env;
 
 const cohere = new CohereClient({
@@ -18,7 +19,11 @@ const cohere = new CohereClient({
 });
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: OPENAI_API_KEY,
+  baseURL: "https://open-assistant-ai.astra.datastax.com/v1",
+  defaultHeaders: {
+    "astra-api-token": ASTRA_DB_APPLICATION_TOKEN,
+  }
 });
 
 const astraDb = new AstraDB(ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_ID, ASTRA_DB_REGION, ASTRA_DB_NAMESPACE);
