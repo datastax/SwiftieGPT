@@ -24,6 +24,8 @@ const openai = new OpenAI({
   baseURL: "https://2ed8-45-37-48-83.ngrok-free.app/v1",
   defaultHeaders: {
     "astra-api-token": ASTRA_DB_APPLICATION_TOKEN,
+    "api-key": COHERE_API_KEY,
+    "embedding-model": "cohere/embed-english-v3.0",
   }
 });
 
