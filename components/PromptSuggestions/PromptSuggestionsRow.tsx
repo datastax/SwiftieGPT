@@ -4,12 +4,12 @@ const PromptSuggestionRow = ({ onPromptClick }) => {
   const prompts = [
     "How did Taylor become Time's Person of the Year? 🎤",
     "What is Taylor's net worth? 💰",
-    "Who is joining Taylor for the Eras Tour shows in Paris? ❤️",
+    "Who is joining Taylor on the Eras Tour in Paris? ❤️",
     "How many Grammy Awards has Taylor won? 🏆",
   ];
 
   return (
-    <div className="flex flex-row flex-wrap justify-start items-center py-4 gap-2 z-10">
+    <div className="flex flex-row flex-wrap justify-center items-center py-4 gap-2 z-10">
       {prompts.map((prompt, index) => (
         <PromptSuggestionButton key={`suggestion-${index}`} text={prompt} onClick={() => onPromptClick(prompt)} />
       ))}
