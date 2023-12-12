@@ -33,7 +33,7 @@ const splitter = new RecursiveCharacterTextSplitter({
   chunkOverlap: 200,
 });
 
-const createCollection = async (similarityMetric = 'dot_product') => {
+const createCollection = async (similarityMetric: "dot_product" | "cosine" | "euclidean" = 'dot_product') => {
   const res = await astraDb.createCollection(ASTRA_DB_COLLECTION, {
     vector: {
       size: 384,
@@ -43,7 +43,7 @@ const createCollection = async (similarityMetric = 'dot_product') => {
   console.log(res);
 };
 
-const loadSampleData = async (similarityMetric = 'dot_product') => {
+const loadSampleData = async (similarityMetric: "dot_product" | "cosine" | "euclidean" = 'dot_product') => {
   const collection = await astraDb.collection(ASTRA_DB_COLLECTION);
   for await (const url of taylorData) {
     console.log(`Processing url ${url}`);
