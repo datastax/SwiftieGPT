@@ -1,6 +1,3 @@
-import { BedrockEmbeddings } from "langchain/embeddings/bedrock";
-import { BedrockChat } from "langchain/chat_models/bedrock/web";
-import { AIMessage, HumanMessage, SystemMessage } from "langchain/schema";
 import { CohereClient } from "cohere-ai";
 
 import OpenAI from 'openai';
@@ -26,44 +23,36 @@ const openai = new OpenAI({
 
 const astraDb = new AstraDB(ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_ID, ASTRA_DB_REGION, ASTRA_DB_NAMESPACE);
 
-const formatMessage = (message: VercelChatMessage) => {
-  return `${message.role}: ${message.content}`;
-};
-
 export async function POST(req: Request) {
   try {
-    const {messages, useRag, llm, similarityMetric} = await req.json();
+    const {messages} = await req.json();
     const latestMessage = messages[messages?.length - 1]?.content;
 
     let docContext = '';
-    if (useRag) {
 
-      const embedded = await cohere.embed({
-        texts: [latestMessage],
-        model: "embed-english-light-v3.0",
-        inputType: "search_query",
+    const embedded = await cohere.embed({
+      texts: [latestMessage],
+      model: "embed-english-light-v3.0",
+      inputType: "search_query",
+    });
+
+    try {
+      const collection = await astraDb.collection(ASTRA_DB_COLLECTION);
+      const cursor = collection.find(null, {
+        sort: {
+          $vector: embedded?.embeddings[0],
+        },
+        limit: 10,
       });
 
-      try {
-        const collection = await astraDb.collection(ASTRA_DB_COLLECTION);
-        const cursor = collection.find(null, {
-          sort: {
-            $vector: embedded?.embeddings[0],
-          },
-          limit: 10,
-        });
+      const documents = await cursor.toArray();
 
-        const documents = await cursor.toArray();
+      const docsMap = documents?.map(doc => doc.text);
 
-        const docsMap = documents?.map(doc => doc.text);
-        
-        console.log(docsMap);
-
-        docContext = JSON.stringify(docsMap);
-      } catch (e) {
-        console.log("Error querying db...");
-        docContext = "";
-      }
+      docContext = JSON.stringify(docsMap);
+    } catch (e) {
+      console.log("Error querying db...");
+      docContext = "";
     }
 
     const Template = {
@@ -84,7 +73,7 @@ export async function POST(req: Request) {
 
     const response = await openai.chat.completions.create(
       {
-        model: llm ?? 'gpt-4',
+        model: 'gpt-4',
         stream: true,
         messages: [Template, ...messages],
       }
