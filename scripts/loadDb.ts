@@ -27,8 +27,8 @@ const taylorData = [
   'https://www.tstheerastourfilm.com/participating-territories/'
 ];
 
-const {ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_ENDPOINT, ASTRA_DB_NAMESPACE} = process.env;
-const astraDb = new AstraDB(ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_ENDPOINT, ASTRA_DB_NAMESPACE);
+const {ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_ENDPOINT} = process.env;
+const astraDb = new AstraDB(ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_ENDPOINT);
 
 const splitter = new RecursiveCharacterTextSplitter({
   chunkSize: 512,

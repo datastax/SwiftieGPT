@@ -26,7 +26,6 @@ This project is a starter for creating a chatbot using Astra DB and Vercel. It's
 3. Set up the following environment variables in your IDE or `.env` file:
     - `OPENAI_API_KEY`: api key for OPENAI
     - `COHERE_API_KEY`: api key for COHERE
-    - `ASTRA_DB_NAMESPACE`: The existing Astra Namespace/Keyspace **_in a vector-enabled DB_**
     - `ASTRA_DB_ENDPOINT`: Your Astra DB vector database endpoint
         - Copy from the `Database Detail`
     - `ASTRA_DB_APPLICATION_TOKEN`: The generated app token for your Astra database
