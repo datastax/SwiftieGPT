@@ -60,4 +60,4 @@ const loadSampleData = async (similarityMetric: SimilarityMetric = 'dot_product'
   }
 };
 
-createCollection().then(() => loadSampleData(metric));
+createCollection().then(() => loadSampleData());
