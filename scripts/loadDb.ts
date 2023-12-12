@@ -29,8 +29,8 @@ const {ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_ID, ASTRA_DB_REGION, ASTRA_DB_NAMESP
 const astraDb = new AstraDB(ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_ID, ASTRA_DB_REGION, ASTRA_DB_NAMESPACE);
 
 const splitter = new RecursiveCharacterTextSplitter({
-  chunkSize: 1000,
-  chunkOverlap: 200,
+  chunkSize: 512,
+  chunkOverlap: 100,
 });
 
 const createCollection = async (similarityMetric: "dot_product" | "cosine" | "euclidean" = 'dot_product') => {
