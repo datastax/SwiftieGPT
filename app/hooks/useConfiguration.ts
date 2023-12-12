@@ -24,7 +24,7 @@ const useConfiguration = () => {
 
   const setConfiguration = (rag: boolean, llm: string, similarityMetric: SimilarityMetric) => {
     setUseRag(rag);
-    setLlm("cohere/command");
+    setLlm(llm);
     setSimilarityMetric(similarityMetric);
   }
 
