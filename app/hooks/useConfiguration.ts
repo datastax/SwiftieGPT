@@ -17,7 +17,7 @@ const useConfiguration = () => {
   };
 
   const [useRag, setUseRag] = useState<boolean>(() => getLocalStorageValue('useRag', 'true') === 'true');
-  const [llm, setLlm] = useState<string>(() => getLocalStorageValue('llm', 'gpt-4', ['meta.llama2-13b-chat-v1', 'ai21.j2-mid-v1', 'ai21.j2-ultra-v1']));
+  const [llm, setLlm] = useState<string>(() => getLocalStorageValue('llm', 'cohere/command', ['meta.llama2-13b-chat-v1', 'ai21.j2-mid-v1', 'ai21.j2-ultra-v1']));
   const [similarityMetric, setSimilarityMetric] = useState<SimilarityMetric>(
     () => getLocalStorageValue('similarityMetric', 'cosine') as SimilarityMetric
   );
