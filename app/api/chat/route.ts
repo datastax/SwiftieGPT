@@ -21,7 +21,7 @@ const cohere = new CohereClient({
 const openai = new OpenAI({
   apiKey: OPENAI_API_KEY,
   // baseURL: "https://open-assistant-ai.astra.datastax.com/v1",
-  baseUrl: "https://2ed8-45-37-48-83.ngrok-free.app",
+  baseURL: "https://2ed8-45-37-48-83.ngrok-free.app",
   defaultHeaders: {
     "astra-api-token": ASTRA_DB_APPLICATION_TOKEN,
   }
