@@ -19,6 +19,7 @@
     "langchain": "^0.0.196",
     "next": "14.0.1",
     "openai": "^4.20.0",
+    "puppeteer": "^19.11.1",
     "react": "^18",
     "react-dom": "^18",
     "react-markdown": "^9.0.0",
