@@ -21,6 +21,9 @@ const taylorData = [
   'https://taylorswift.tumblr.com/',
   'https://www.forbes.com/profile/taylor-swift/?sh=242c42f818e2',
   'https://taylorswiftstyle.com/',
+  'https://www.tstheerastourfilm.com/participating-territories/',
+  'https://www.cosmopolitan.com/entertainment/celebs/a29684699/taylor-swift-dating-boyfriend-history/E',
+  'https://www.tstheerastourfilm.com/participating-territories/'
 ];
 
 const {ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_ID, ASTRA_DB_REGION, ASTRA_DB_NAMESPACE} = process.env;
