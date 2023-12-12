@@ -1,5 +1,7 @@
 # Chatbot (Taylor's Version)
 
+![Chatbot (Taylor's Version)](gh-hero.png)
+
 This project is a starter for creating a chatbot using Astra DB and Vercel. It's designed to be easy to deploy and use, with a focus on performance and usability.
 
 ## Features
