@@ -81,7 +81,7 @@ export default function Home() {
     </main>
     <Configure
       isOpen={configureOpen}
-      onClose={() => setConfigureOpen(true)}
+      onClose={() => setConfigureOpen(false)}
       useRag={useRag}
       llm={llm}
       similarityMetric={similarityMetric}
