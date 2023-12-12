@@ -43,8 +43,8 @@ export default function Home() {
           <div className='h-full flex flex-col items-center'>
             <Image src={tswiftImg} width="250" height="75" alt="Chatbot (Taylor's Version) logo" />
             <div className='h-full flex flex-col justify-center'>
-              <p className="chatbot-text-secondary-inverse text-sm md:text-base mt-2 md:mt-4 px-2">
-                Chatting with Chatbot (Taylor&apos;s Version) is a breeze! Simply type your questions or requests in a clear and concise manner. Responses are sourced from her Wikipedia page, Eras tour website and others.
+              <p className="chatbot-text-secondary-inverse text-lg text-center mt-2 md:mt-4 px-2">
+                Chatting with Chatbot (Taylor&apos;s Version) is a breeze! Simply type your questions or requests in a clear and concise manner. Responses are sourced from her Wikipedia page, Eras Tour website and others.
               </p>
               <PromptSuggestionRow onPromptClick={handlePrompt} />
             </div>
