@@ -1,14 +1,24 @@
-import { AstraDB } from "@datastax/astra-db-ts";
-import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
+import {AstraDB} from "@datastax/astra-db-ts";
+import {RecursiveCharacterTextSplitter} from "langchain/text_splitter";
 import 'dotenv/config'
-import { CohereClient } from "cohere-ai";
-import { SimilarityMetric } from "../app/hooks/useConfiguration";
+import {CohereClient} from "cohere-ai";
+import {SimilarityMetric} from "../app/hooks/useConfiguration";
+
+const {ASTRA_DB_COLLECTION, COHERE_API_KEY} = process.env;
 
 const cohere = new CohereClient({
   token: COHERE_API_KEY,
 });
 
-const {ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_ID, ASTRA_DB_REGION, ASTRA_DB_NAMESPACE } = process.env;
+const taylorData = [
+  {
+    url: '',
+    title: '',
+    content: '',
+  }
+];
+
+const {ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_ID, ASTRA_DB_REGION, ASTRA_DB_NAMESPACE} = process.env;
 const astraDb = new AstraDB(ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_ID, ASTRA_DB_REGION, ASTRA_DB_NAMESPACE);
 
 const splitter = new RecursiveCharacterTextSplitter({
@@ -17,23 +27,23 @@ const splitter = new RecursiveCharacterTextSplitter({
 });
 
 const createCollection = async (similarityMetric: SimilarityMetric = 'dot_product') => {
-  const res = await astraDb.createCollection(`tswift`, {
+  const res = await astraDb.createCollection(ASTRA_DB_COLLECTION, {
     vector: {
       size: 384,
-      function: similarity_metric,
+      function: similarityMetric,
     }
   });
   console.log(res);
 };
 
 const loadSampleData = async (similarityMetric: SimilarityMetric = 'dot_product') => {
-  const collection = await astraDb.collection(`tswift`);
-  for await (const { url, title, content } of sampleData) {
+  const collection = await astraDb.collection(ASTRA_DB_COLLECTION);
+  for await (const {url, title, content} of taylorData) {
     const chunks = await splitter.splitText(content);
     let i = 0;
     for await (const chunk of chunks) {
       const embedded = await cohere.embed({
-        texts: [latestMessage],
+        texts: [chunk],
         model: "embed-english-light-v3.0",
         inputType: "search_query",
       });
