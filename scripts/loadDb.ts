@@ -54,7 +54,7 @@ const loadSampleData = async (similarityMetric: "dot_product" | "cosine" | "eucl
       const embedded = await cohere.embed({
         texts: [chunk],
         model: "embed-english-light-v3.0",
-        inputType: "search_query",
+        inputType: "search_document",
       });
 
       const res = await collection.insertOne({
