@@ -9,7 +9,6 @@ const cohere = new CohereClient({
 });
 
 const {ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_ID, ASTRA_DB_REGION, ASTRA_DB_NAMESPACE } = process.env;
-
 const astraDb = new AstraDB(ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_ID, ASTRA_DB_REGION, ASTRA_DB_NAMESPACE);
 
 const splitter = new RecursiveCharacterTextSplitter({
@@ -17,27 +16,31 @@ const splitter = new RecursiveCharacterTextSplitter({
   chunkOverlap: 200,
 });
 
-const createCollection = async (similarity_metric: SimilarityMetric = 'cosine') => {
-  const res = await astraDb.createCollection(`chat_${similarity_metric}`, {
+const createCollection = async (similarityMetric: SimilarityMetric = 'dot_product') => {
+  const res = await astraDb.createCollection(`tswift`, {
     vector: {
-      size: 1536,
+      size: 384,
       function: similarity_metric,
     }
   });
   console.log(res);
 };
 
-const loadSampleData = async (similarity_metric: SimilarityMetric = 'cosine') => {
-  const collection = await astraDb.collection(`chat_${similarity_metric}`);
-  for await (const { url, title, content} of sampleData) {
+const loadSampleData = async (similarityMetric: SimilarityMetric = 'dot_product') => {
+  const collection = await astraDb.collection(`tswift`);
+  for await (const { url, title, content } of sampleData) {
     const chunks = await splitter.splitText(content);
     let i = 0;
     for await (const chunk of chunks) {
-      const {data} = await openai.embeddings.create({input: chunk, model: 'text-embedding-ada-002'});
+      const embedded = await cohere.embed({
+        texts: [latestMessage],
+        model: "embed-english-light-v3.0",
+        inputType: "search_query",
+      });
 
       const res = await collection.insertOne({
         document_id: `${url}-${i}`,
-        $vector: data[0]?.embedding,
+        $vector: embedded[0]?.embedding,
         url,
         title,
         content: chunk
@@ -47,4 +50,4 @@ const loadSampleData = async (similarity_metric: SimilarityMetric = 'cosine') =>
   }
 };
 
-createCollection("dot_product").then(() => loadSampleData(metric));
+createCollection().then(() => loadSampleData(metric));
