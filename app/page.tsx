@@ -1,7 +1,7 @@
 "use client";
 import {useEffect, useRef, useState} from 'react';
 import Image from 'next/image';
-import tswiftImg from './assets/tswift.png';
+import tswiftImg from './assets/taylors_version.png';
 import Bubble from '../components/Bubble'
 import { useChat } from 'ai/react';
 import Footer from '../components/Footer';
@@ -38,7 +38,7 @@ export default function Home() {
   return (
     <>
     <main className="flex h-screen flex-col items-center justify-center">
-      <section className='chatbot-section flex flex-col origin:w-[800px] w-full origin:h-[735px] h-full rounded-md px-2 md:px-6 md:py-4'>
+      <section className='chatbot-section flex flex-col origin:w-[800px] w-full md:h-[735px] h-full rounded-md px-2 md:px-6 md:py-4'>
         {!messages || messages.length === 0 ? (
           <div className='h-full flex flex-col items-center'>
             <Image src={tswiftImg} width="250" height="75" alt="Chatbot (Taylor's Version) logo" />
@@ -51,9 +51,12 @@ export default function Home() {
           </div>
         ): (
           <>
-            <div className="header relative text-white p-4 pb-16 rounded-t-md overflow-hidden">
+            <div className='hidden md:flex flex-col items-center'>
+              <Image src={tswiftImg} width="250" height="75" alt="Chatbot (Taylor's Version) logo" />
+            </div>
+            <div className="md:hidden header relative text-white p-4 pb-16 rounded-t-md overflow-hidden">
               <div className="absolute inset-0 clip-path-header"></div>
-              <h1 className='active-chat-header relative text-xl float-right z-10'>Chatbot (Taylor&apos;s Version)</h1>
+              <Image className='absolute right-10 z-10' src={tswiftImg} width="83" height="23" alt="Chatbot (Taylor's Version) logo" />
             </div>
             <div className='flex-1 relative overflow-y-auto my-4 md:my-6'>
               <div className='absolute w-full h-full overflow-x-hidden'>
@@ -68,10 +71,7 @@ export default function Home() {
             <form className='flex h-[40px] gap-2' onSubmit={handleSend}>
               <input onChange={handleInputChange} value={input} className='chatbot-input flex-1 text-sm md:text-base outline-none bg-transparent rounded-lg p-2' placeholder='Send a message...' />
               <button type="submit" className='chatbot-send-button flex rounded-md items-center justify-center px-2.5 origin:px-3'>
-                <svg width="20" height="20" viewBox="0 0 20 20">
-                  <path d="M2.925 5.025L9.18333 7.70833L2.91667 6.875L2.925 5.025ZM9.175 12.2917L2.91667 14.975V13.125L9.175 12.2917ZM1.25833 2.5L1.25 8.33333L13.75 10L1.25 11.6667L1.25833 17.5L18.75 10L1.25833 2.5Z" />
-                </svg>
-                <span className='hidden origin:block font-semibold text-sm ml-2'>Send</span>
+                <span className='font-semibold text-sm'>Send</span>
               </button>
             </form>
             <Footer />

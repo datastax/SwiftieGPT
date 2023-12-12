@@ -8,8 +8,9 @@
   --text-primary-main: #7724AA;
   --text-secondary: #A6AAAE;
   --text-secondary-inverse: #494A4D;
-  --background-bubble-primary: #611C9B;
-  --background-bubble-secondary: #F7F7F7;
+  --text-bubble-primary: #EB4039;
+  --background-bubble-primary: #FFDEE0;
+  --background-bubble-secondary: #F0F0F0;
   --border-primary: #CED0D2;
   --background-soft: #F3E5F5;
   --background-start-rgb: 214, 219, 220;
@@ -17,8 +18,8 @@
   --text-tertiary: #820DEB;
   --shadow-primary: 0px 6px 16px 0px #0A0A0A1F, 0px 4px 14px 0px #0A0A0A14, 0px 8px 10px 0px #0A0A0A14;
   --processing-dot-size: 4px;
-  --header-background: #862FBA;
-  --footer-background: #DA92FC;
+  --header-footer-background: #DA92FC;
+  --button-background: #FDFFAA;
 }
 
 
@@ -38,15 +39,16 @@
 
 
 body {
-  background: linear-gradient(to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  background-image: url('assets/ts-chatbot-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .chatbot-section {
   background-color: var(--text-primary);
   box-shadow: var(--shadow-primary);
-  border: 1px solid var(--border-primary);
+  /* border: 1px solid var(--border-primary); */
 }
 
 .chatbot-header {
@@ -84,8 +86,8 @@ body {
 }
 
 .chatbot-send-button {
-  background-color: var(--text-primary-inverse);
-  color: var(--text-primary);
+  background-color: var(--button-background);
+  color: var(--text-primary-inverse);
 }
 
 .chatbot-send-button svg {
@@ -124,7 +126,7 @@ body {
 
 .talk-bubble.user {
   text-align: right;
-  color: var(--text-primary);
+  color: var(--text-bubble-primary);
   background-color: var(--background-bubble-primary);
   border-radius: 10px;
   border-bottom-right-radius: 0px;
@@ -201,8 +203,8 @@ body {
 }
 
 .prompt-button {
-  background-color: var(--background-soft);
-  color: var(--text-primary-main);
+  background-color: var(--background-bubble-primary);
+  color: var(--text-bubble-primary);
 }
 
 /* Toggle Styles */
@@ -279,7 +281,7 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-  background: var(--header-background);
+  background: var(--header-footer-background);
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 70%);
   z-index: 0;
 }
@@ -302,7 +304,7 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-  background: var(--footer-background);
+  background: var(--header-footer-background);
   clip-path: polygon(0 0, 100% 30%, 100% 100%, 0 100%);
   z-index: 0;
 }
