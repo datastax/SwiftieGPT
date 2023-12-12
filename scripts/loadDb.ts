@@ -27,8 +27,8 @@ const taylorData = [
   'https://www.tstheerastourfilm.com/participating-territories/'
 ];
 
-const {ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_ID, ASTRA_DB_REGION, ASTRA_DB_NAMESPACE} = process.env;
-const astraDb = new AstraDB(ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_ID, ASTRA_DB_REGION, ASTRA_DB_NAMESPACE);
+const {ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_ENDPOINT, ASTRA_DB_NAMESPACE} = process.env;
+const astraDb = new AstraDB(ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_ENDPOINT, ASTRA_DB_NAMESPACE);
 
 const splitter = new RecursiveCharacterTextSplitter({
   chunkSize: 512,
@@ -38,8 +38,8 @@ const splitter = new RecursiveCharacterTextSplitter({
 const createCollection = async (similarityMetric: SimilarityMetric = 'dot_product') => {
   const res = await astraDb.createCollection(ASTRA_DB_COLLECTION, {
     vector: {
-      size: 384,
-      function: similarityMetric,
+      dimensions: 384,
+      metric: similarityMetric,
     }
   });
   console.log(res);
