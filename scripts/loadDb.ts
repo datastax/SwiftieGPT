@@ -5,7 +5,8 @@ import {PuppeteerWebBaseLoader} from "langchain/document_loaders/web/puppeteer";
 import {RecursiveCharacterTextSplitter} from "langchain/text_splitter";
 import 'dotenv/config'
 import {CohereClient} from "cohere-ai";
-import {SimilarityMetric} from "../app/hooks/useConfiguration";
+
+type SimilarityMetric = "dot_product" | "cosine" | "euclidean";
 
 const {ASTRA_DB_COLLECTION, COHERE_API_KEY} = process.env;
 
