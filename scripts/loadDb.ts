@@ -6,6 +6,8 @@ import {RecursiveCharacterTextSplitter} from "langchain/text_splitter";
 import 'dotenv/config'
 import {CohereClient} from "cohere-ai";
 
+type SimilarityMetric = "dot_product" | "cosine" | "euclidean";
+
 const {ASTRA_DB_COLLECTION, COHERE_API_KEY} = process.env;
 
 const cohere = new CohereClient({
@@ -33,7 +35,7 @@ const splitter = new RecursiveCharacterTextSplitter({
   chunkOverlap: 100,
 });
 
-const createCollection = async (similarityMetric: "dot_product" | "cosine" | "euclidean" = 'dot_product') => {
+const createCollection = async (similarityMetric: SimilarityMetric = 'dot_product') => {
   const res = await astraDb.createCollection(ASTRA_DB_COLLECTION, {
     vector: {
       size: 384,
@@ -43,7 +45,7 @@ const createCollection = async (similarityMetric: "dot_product" | "cosine" | "eu
   console.log(res);
 };
 
-const loadSampleData = async (similarityMetric: "dot_product" | "cosine" | "euclidean" = 'dot_product') => {
+const loadSampleData = async (similarityMetric: SimilarityMetric = 'dot_product') => {
   const collection = await astraDb.collection(ASTRA_DB_COLLECTION);
   for await (const url of taylorData) {
     console.log(`Processing url ${url}`);
