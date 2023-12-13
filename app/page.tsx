@@ -36,7 +36,9 @@ export default function Home() {
             <Image src={tswiftImg} width="250" height="75" alt="Swiftie GPT logo" />
             <div className='h-full flex flex-col justify-center'>
               <p className="chatbot-text-secondary-inverse text-lg text-center mt-2 md:mt-4 px-2">
-                Chatting with Chatbot (Taylor&apos;s Version) is a breeze! Simply type your questions or requests in a clear and concise manner. Responses are sourced from her Wikipedia page, Eras Tour website and others.
+                SwiftieGPT knows Taylor all too well. Ask questions in a clear and concise manner and get back responses based on details from publicly available data on Taylor. From tour dates to song lyrics, learn everything there is to know about the songstress here.
+                <br/><br/>
+                For Swifties, by Swifties.
               </p>
               <PromptSuggestionRow onPromptClick={handlePrompt} />
             </div>
