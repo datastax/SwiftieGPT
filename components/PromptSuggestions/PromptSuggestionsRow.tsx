@@ -4,7 +4,7 @@ const PromptSuggestionRow = ({ onPromptClick }) => {
   const prompts = [
     "How did Taylor become Time's Person of the Year? 🎤",
     "What is Taylor's net worth? 💰",
-    "Who is joining Taylor on the Eras Tour in Paris? ❤️",
+    "What were the surprise songs in Chicago? 🤯",
     "How many Grammy Awards has Taylor won? 🏆",
   ];
 

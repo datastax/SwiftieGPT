@@ -24,7 +24,9 @@ const taylorData = [
   'https://taylorswiftstyle.com/',
   'https://www.tstheerastourfilm.com/participating-territories/',
   'https://www.cosmopolitan.com/entertainment/celebs/a29684699/taylor-swift-dating-boyfriend-history/E',
-  'https://www.tstheerastourfilm.com/participating-territories/'
+  'https://www.tstheerastourfilm.com/participating-territories/',
+  'https://en.wikipedia.org/wiki/The_Eras_Tour',
+  'https://taylorswift.fandom.com/wiki/The_Eras_Tour',
 ];
 
 const {ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_ENDPOINT} = process.env;
