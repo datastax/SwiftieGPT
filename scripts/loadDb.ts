@@ -39,7 +39,7 @@ const createCollection = async (similarityMetric: SimilarityMetric = 'dot_produc
   const res = await astraDb.createCollection(ASTRA_DB_COLLECTION, {
     vector: {
       dimension: 384,
-      function: similarityMetric,
+      metric: similarityMetric,
     }
   });
   console.log(res);
