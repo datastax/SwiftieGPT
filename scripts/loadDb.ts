@@ -6,7 +6,6 @@ import {RecursiveCharacterTextSplitter} from "langchain/text_splitter";
 import 'dotenv/config'
 import { CohereClient } from "cohere-ai";
 
-
 type SimilarityMetric = "dot_product" | "cosine" | "euclidean";
 
 const {ASTRA_DB_COLLECTION, COHERE_API_KEY} = process.env;
@@ -39,8 +38,8 @@ const splitter = new RecursiveCharacterTextSplitter({
 const createCollection = async (similarityMetric: SimilarityMetric = 'dot_product') => {
   const res = await astraDb.createCollection(ASTRA_DB_COLLECTION, {
     vector: {
-      dimensions: 384,
-      metric: similarityMetric,
+      dimension: 384,
+      function: similarityMetric,
     }
   });
   console.log(res);

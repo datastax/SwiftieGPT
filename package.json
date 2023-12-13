@@ -10,7 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@datastax/astra-db-ts": "^0.0.26",
+    "@datastax/astra-db-ts": "^0.0.27",
     "@types/node": "^20.8.10",
     "ai": "^2.2.25",
     "cohere-ai": "^7.6.0",
