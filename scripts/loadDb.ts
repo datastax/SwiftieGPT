@@ -4,7 +4,8 @@ import {PuppeteerWebBaseLoader} from "langchain/document_loaders/web/puppeteer";
 
 import {RecursiveCharacterTextSplitter} from "langchain/text_splitter";
 import 'dotenv/config'
-import {CohereClient} from "cohere-ai";
+import { CohereClient } from "cohere-ai";
+
 
 type SimilarityMetric = "dot_product" | "cosine" | "euclidean";
 
@@ -51,7 +52,6 @@ const loadSampleData = async (similarityMetric: SimilarityMetric = 'dot_product'
     console.log(`Processing url ${url}`);
     const content = await scrapePage(url);
     const chunks = await splitter.splitText(content);
-    let i = 0;
     for await (const chunk of chunks) {
       const embedded = await cohere.embed({
         texts: [chunk],
@@ -59,12 +59,13 @@ const loadSampleData = async (similarityMetric: SimilarityMetric = 'dot_product'
         inputType: "search_document",
       });
 
+      const embeddedText = embedded?.embeddings[0];
+
       const res = await collection.insertOne({
-        $vector: embedded[0]?.embedding,
+        $vector: embeddedText,
         text: chunk
       });
       console.log(res)
-      i++;
     }
   }
 };
