@@ -2,7 +2,7 @@
 
 ![SwiftieGPT](gh-hero.png)
 
-This project is a starter for creating a chatbot using Astra DB and Vercel. It's designed to be easy to deploy and use, with a focus on performance and usability.
+SwiftieGPT knows Taylor all too well. Ask questions in a clear and concise manner and get back responses based on details from publicly available data on Taylor. From tour dates to song lyrics, learn everything there is to know about the songstress here.
 
 ## Features
 
@@ -18,6 +18,7 @@ This project is a starter for creating a chatbot using Astra DB and Vercel. It's
 - An Astra DB account. You can [create one here](https://astra.datastax.com/register).
     - An Astra Vector Database
 - An OpenAI account and api key [create one here](https://platform.openai.com/)
+- A Cohere account and api key [create one here](https://cohere.com/)
 
 ### Setup
 
@@ -31,16 +32,7 @@ This project is a starter for creating a chatbot using Astra DB and Vercel. It's
     - `ASTRA_DB_APPLICATION_TOKEN`: The generated app token for your Astra database
         - To create a new token go to your database's `Connect` tab and click `Generate Token`. (your Application Token begins with `AstraCS:...`)
     - `ASTRA_DB_COLLECTION`: The name of your Astra Collection
-4. Populate your database with sample data by running `npm run seed` in your terminal.
 
 ### Running the Project
 
 To start the development server, run `npm run dev` in your terminal. Open [http://localhost:3000](http://localhost:3000) to view the chatbot in your browser.
-
-## Deployment
-
-You can easily deploy your chatbot to Vercel by clicking the button below:
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/datastax/aws-bedrock-starter&env=ASTRA_DB_NAMESPACE,OPENAI_API_KEY,ASTRA_DB_ID,ASTRA_DB_REGION,ASTRA_DB_APPLICATION_TOKEN)
-
-Remember to set your environment variables to the values obtained when setting up your Astra DB and OpenAI accounts.
