@@ -1,7 +1,7 @@
 "use client";
 import {useEffect, useRef} from 'react';
 import Image from 'next/image';
-import tswiftImg from './assets/taylors_version.png';
+import tswiftImg from './assets/swiftiegpt.png';
 import Bubble from '../components/Bubble'
 import { useChat } from 'ai/react';
 import Footer from '../components/Footer';
@@ -33,7 +33,7 @@ export default function Home() {
       <section className='chatbot-section flex flex-col origin:w-[800px] w-full md:h-[735px] h-full rounded-md px-2 md:px-6 md:py-4'>
         {!messages || messages.length === 0 ? (
           <div className='h-full flex flex-col items-center'>
-            <Image src={tswiftImg} width="250" height="75" alt="Chatbot (Taylor's Version) logo" />
+            <Image src={tswiftImg} width="250" height="75" alt="Swiftie GPT logo" />
             <div className='h-full flex flex-col justify-center'>
               <p className="chatbot-text-secondary-inverse text-lg text-center mt-2 md:mt-4 px-2">
                 Chatting with Chatbot (Taylor&apos;s Version) is a breeze! Simply type your questions or requests in a clear and concise manner. Responses are sourced from her Wikipedia page, Eras Tour website and others.
@@ -44,11 +44,11 @@ export default function Home() {
         ): (
           <>
             <div className='hidden md:flex flex-col items-center'>
-              <Image src={tswiftImg} width="250" height="75" alt="Chatbot (Taylor's Version) logo" />
+              <Image src={tswiftImg} width="250" height="75" alt="Swiftie GPT logo" />
             </div>
             <div className="md:hidden header relative text-white p-4 pb-16 rounded-t-md overflow-hidden">
               <div className="absolute inset-0 clip-path-header"></div>
-              <Image className='absolute right-10 z-10' src={tswiftImg} width="83" height="23" alt="Chatbot (Taylor's Version) logo" />
+              <Image className='absolute right-10 z-10' src={tswiftImg} width="83" height="23" alt="SwiftieGPT logo" />
             </div>
             <div className='flex-1 relative overflow-y-auto my-4 md:my-6'>
               <div className='absolute w-full h-full overflow-x-hidden'>
