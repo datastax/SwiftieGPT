@@ -36,3 +36,4 @@ SwiftieGPT knows Taylor all too well. Ask questions in a clear and concise manne
 ### Running the Project
 
 To start the development server, run `npm run dev` in your terminal. Open [http://localhost:3000](http://localhost:3000) to view the chatbot in your browser.
+
