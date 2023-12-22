@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "seed": "ts-node ./scripts/populateDb.ts",
+    "seed": "ts-node ./scripts/loadDb.ts",
     "lint": "next lint"
   },
   "dependencies": {
