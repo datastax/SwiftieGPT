@@ -6,7 +6,6 @@ import {AstraDB} from "@datastax/astra-db-ts";
 const {
   ASTRA_DB_ENDPOINT,
   ASTRA_DB_APPLICATION_TOKEN,
-  ASTRA_DB_NAMESPACE,
   ASTRA_DB_COLLECTION,
   COHERE_API_KEY,
   OPENAI_API_KEY,
@@ -18,10 +17,6 @@ const cohere = new CohereClient({
 
 const openai = new OpenAI({
   apiKey: OPENAI_API_KEY,
-  baseURL: "https://open-assistant-ai.astra.datastax.com/v1",
-  defaultHeaders: {
-    "astra-api-token": ASTRA_DB_APPLICATION_TOKEN,
-  }
 });
 
 const astraDb = new AstraDB(ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_ENDPOINT);
