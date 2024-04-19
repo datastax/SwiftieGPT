@@ -1,18 +1,16 @@
-import {AstraDB} from "@datastax/astra-db-ts";
-import {PuppeteerWebBaseLoader} from "langchain/document_loaders/web/puppeteer";
+import { AstraDB } from "@datastax/astra-db-ts";
+import { PuppeteerWebBaseLoader } from "langchain/document_loaders/web/puppeteer";
+import OpenAI from "openai";
 
 
 import {RecursiveCharacterTextSplitter} from "langchain/text_splitter";
 import 'dotenv/config'
-import { CohereClient } from "cohere-ai";
 
 type SimilarityMetric = "dot_product" | "cosine" | "euclidean";
 
-const {ASTRA_DB_COLLECTION, COHERE_API_KEY} = process.env;
+const {ASTRA_DB_COLLECTION, ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_API_ENDPOINT, OPENAI_API_KEY} = process.env;
 
-const cohere = new CohereClient({
-  token: COHERE_API_KEY,
-});
+const openai = new OpenAI();
 
 const taylorData = [
   'https://time.com/6342806/person-of-the-year-2023-taylor-swift/',
@@ -29,8 +27,7 @@ const taylorData = [
   'https://taylorswift.fandom.com/wiki/The_Eras_Tour',
 ];
 
-const {ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_ENDPOINT} = process.env;
-const astraDb = new AstraDB(ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_ENDPOINT);
+const astraDb = new AstraDB(ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_API_ENDPOINT);
 
 const splitter = new RecursiveCharacterTextSplitter({
   chunkSize: 512,
@@ -40,7 +37,7 @@ const splitter = new RecursiveCharacterTextSplitter({
 const createCollection = async (similarityMetric: SimilarityMetric = 'dot_product') => {
   const res = await astraDb.createCollection(ASTRA_DB_COLLECTION, {
     vector: {
-      dimension: 384,
+      dimension: 1536,
       metric: similarityMetric,
     }
   });
@@ -54,16 +51,16 @@ const loadSampleData = async (similarityMetric: SimilarityMetric = 'dot_product'
     const content = await scrapePage(url);
     const chunks = await splitter.splitText(content);
     for await (const chunk of chunks) {
-      const embedded = await cohere.embed({
-        texts: [chunk],
-        model: "embed-english-light-v3.0",
-        inputType: "search_document",
+      const embedding = await openai.embeddings.create({
+        model: "text-embedding-3-small",
+        input: chunk,
+        encoding_format: "float",
       });
 
-      const embeddedText = embedded?.embeddings[0];
+      const vector = embedding.data[0].embedding;
 
       const res = await collection.insertOne({
-        $vector: embeddedText,
+        $vector: vector,
         text: chunk
       });
       console.log(res)
@@ -74,7 +71,7 @@ const loadSampleData = async (similarityMetric: SimilarityMetric = 'dot_product'
 const scrapePage = async (url: string) => {
   const loader = new PuppeteerWebBaseLoader(url, {
     launchOptions: {
-      headless: "new"
+      headless: true
     },
     gotoOptions: {
       waitUntil: "domcontentloaded",

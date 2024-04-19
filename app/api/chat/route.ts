@@ -1,25 +1,19 @@
-import { CohereClient } from "cohere-ai";
 import OpenAI from 'openai';
 import { OpenAIStream, StreamingTextResponse } from "ai";
-import {AstraDB} from "@datastax/astra-db-ts";
+import { AstraDB } from "@datastax/astra-db-ts";
 
 const {
-  ASTRA_DB_ENDPOINT,
+  ASTRA_DB_API_ENDPOINT,
   ASTRA_DB_APPLICATION_TOKEN,
   ASTRA_DB_COLLECTION,
-  COHERE_API_KEY,
   OPENAI_API_KEY,
 } = process.env;
-
-const cohere = new CohereClient({
-  token: COHERE_API_KEY,
-});
 
 const openai = new OpenAI({
   apiKey: OPENAI_API_KEY,
 });
 
-const astraDb = new AstraDB(ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_ENDPOINT);
+const astraDb = new AstraDB(ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_API_ENDPOINT);
 
 export async function POST(req: Request) {
   try {
@@ -28,17 +22,17 @@ export async function POST(req: Request) {
 
     let docContext = '';
 
-    const embedded = await cohere.embed({
-      texts: [latestMessage],
-      model: "embed-english-light-v3.0",
-      inputType: "search_query",
+    const embedding = await openai.embeddings.create({
+      model: "text-embedding-3-small",
+      input: latestMessage,
+      encoding_format: "float",
     });
 
     try {
       const collection = await astraDb.collection(ASTRA_DB_COLLECTION);
       const cursor = collection.find(null, {
         sort: {
-          $vector: embedded?.embeddings[0],
+          $vector: embedding.data[0].embedding,
         },
         limit: 10,
       });

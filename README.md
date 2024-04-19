@@ -4,35 +4,34 @@
 
 SwiftieGPT knows Taylor all too well. Ask questions in a clear and concise manner and get back responses based on details from publicly available data on Taylor. From tour dates to song lyrics, learn everything there is to know about the songstress here.
 
-## Features
+## Prerequisites
 
-- **Astra DB Integration**: Store and retrieve data from your Astra DB database with ease.
-- **OpenAI Integration**: Leverage the power of OpenAI to generate intelligent responses.
-- **Easy Deployment**: Deploy your chatbot to Vercel with just a few clicks.
-- **Customizable**: Modify and extend the chatbot to suit your needs.
-
-## Getting Started
-
-### Prerequisites
-
-- An Astra DB account. You can [create one here](https://astra.datastax.com/register).
-    - An Astra Vector Database
+- An Astra DB account. You can [create one here](https://astra.datastax.com/register)
 - An OpenAI account and api key [create one here](https://platform.openai.com/)
-- A Cohere account and api key [create one here](https://cohere.com/)
 
-### Setup
+## Setup
 
-1. Clone this repository to your local machine.
-2. Install the dependencies by running `npm install` in your terminal.
-3. Set up the following environment variables in your IDE or `.env` file:
-    - `OPENAI_API_KEY`: api key for OPENAI
-    - `COHERE_API_KEY`: api key for COHERE
-    - `ASTRA_DB_ENDPOINT`: Your Astra DB vector database endpoint
-        - Copy from the `Database Detail`
-    - `ASTRA_DB_APPLICATION_TOKEN`: The generated app token for your Astra database
-        - To create a new token go to your database's `Connect` tab and click `Generate Token`. (your Application Token begins with `AstraCS:...`)
-    - `ASTRA_DB_COLLECTION`: The name of your Astra Collection
+Clone this repository to your local machine.
 
-### Running the Project
+Install Puppeteer: `npm i puppeteer`. If you're on a newer Macbook, you'll need to run `PUPPETEER_EXPERIMENTAL_CHROMIUM_MAC_ARM=1 npm i puppeteer`.
 
-To start the development server, run `npm run dev` in your terminal. Open [http://localhost:3000](http://localhost:3000) to view the chatbot in your browser.
+Install the rest of the dependencies by running `npm install`.
+
+[1Create a Vector Database](https://docs.datastax.com/en/astra/astra-db-vector/get-started/quickstart.html#create-a-serverless-vector-database) in Astra and generate and Application Token.
+
+Copy to supplied `.env.example` to `.env` and enter your credentials for OpenAI and AstraDB:
+
+- `OPENAI_API_KEY`: API key for OPENAI
+- `ASTRA_DB_API_ENDPOINT`: Your Astra DB vector database endpoint
+- `ASTRA_DB_APPLICATION_TOKEN`: The generated app token for your Astra database
+
+
+## Load the data
+
+The first thing you need to to run this chatbot is to load the data. This may take awhile, so grab some coffee! ☕️
+
+`npx ts-node scripts/loadDb.ts`
+
+## Running the Project
+
+Once the data is loaded, run `npm run dev` in your terminal. Open [http://localhost:3000](http://localhost:3000) to view the chatbot in your browser.
