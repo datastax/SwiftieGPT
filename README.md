@@ -17,7 +17,7 @@ Install Puppeteer: `npm i puppeteer`. If you're on a newer Macbook, you'll need 
 
 Install the rest of the dependencies by running `npm install`.
 
-[1Create a Vector Database](https://docs.datastax.com/en/astra/astra-db-vector/get-started/quickstart.html#create-a-serverless-vector-database) in Astra and generate and Application Token.
+[Create a Vector Database](https://docs.datastax.com/en/astra/astra-db-vector/get-started/quickstart.html#create-a-serverless-vector-database) in Astra and generate and Application Token.
 
 Copy to supplied `.env.example` to `.env` and enter your credentials for OpenAI and AstraDB:
 
@@ -39,5 +39,6 @@ Once the data is loaded, run `npm run dev` in your terminal. Open [http://localh
 ## More Resources
 
 - Astra DB [docs](https://docs.datastax.com/en/astra/astra-db-vector/index.html) and [quickstart](https://docs.datastax.com/en/astra/astra-db-vector/get-started/quickstart.html).
+- Astra DB TypeScript client [on Github](https://github.com/datastax/astra-db-ts)
 - SwiftieGPT how-to [blog post](https://www.datastax.com/blog/using-astradb-vector-to-build-taylor-swift-chatbot)
 
