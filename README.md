@@ -35,3 +35,9 @@ The first thing you need to to run this chatbot is to load the data. This may ta
 ## Running the Project
 
 Once the data is loaded, run `npm run dev` in your terminal. Open [http://localhost:3000](http://localhost:3000) to view the chatbot in your browser.
+
+## More Resources
+
+- Astra DB [docs](https://docs.datastax.com/en/astra/astra-db-vector/index.html) and [quickstart](https://docs.datastax.com/en/astra/astra-db-vector/get-started/quickstart.html).
+- SwiftieGPT how-to [blog post](https://www.datastax.com/blog/using-astradb-vector-to-build-taylor-swift-chatbot)
+
